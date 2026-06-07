@@ -30,8 +30,8 @@
 ### 安装
 
 ```bash
-git clone https://github.com/your-username/灵感发散器.git
-cd 灵感发散器
+git clone https://github.com/Chen-DongFnag/word-inspiration.git
+cd word-inspiration
 npm install
 ```
 
