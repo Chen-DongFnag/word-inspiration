@@ -2,8 +2,6 @@
 
 输入一个词汇，AI 帮你无限发散灵感。基于 Canvas 的交互式词汇联想思维导图，双击节点即可递归展开，探索词语之间的无限联想链路。
 
-![灵感发散器](public/preview.png)
-
 ## 功能
 
 - **AI 驱动联想**：输入任意词汇，AI 自动生成 6 个不同维度的相关词汇
@@ -14,18 +12,17 @@
 
 ## 技术栈
 
-- [Next.js](https://nextjs.org/) 16 (App Router)
+- [Next.js](https://nextjs.org/) 16（App Router）
 - [React](https://react.dev/) 19
 - [Tailwind CSS](https://tailwindcss.com/) v4
 - [d3-force](https://github.com/d3/d3-force) — 力导向图布局
-- [小米 MiMo](https://api.xiaomimimo.com) — AI 词汇联想
 
 ## 快速开始
 
 ### 环境要求
 
 - Node.js 18+
-- 小米 MiMo API Key
+- 任意兼容 OpenAI 接口的 AI 服务 API Key（小米 MiMo、DeepSeek 等）
 
 ### 安装
 
@@ -43,19 +40,48 @@ npm install
 cp .env.example .env.local
 ```
 
-```env
-AI_API_KEY=your-api-key-here
-AI_API_BASE_URL=https://api.xiaomimimo.com/v1
-AI_MODEL=mimo-v2.5
-```
-
 ### 启动开发服务器
 
 ```bash
 npm run dev
 ```
 
-打开 [http://localhost:3000](http://localhost:3000) 即可使用。
+打开 http://localhost:3000 即可使用。
+
+## 配置 AI 服务
+
+本项目兼容所有遵循 OpenAI 接口规范的 AI 服务。在 `.env.local` 中修改以下三项即可切换：
+
+### 小米 MiMo（默认）
+
+```env
+AI_API_KEY=你的API密钥
+AI_API_BASE_URL=https://api.xiaomimimo.com/v1
+AI_MODEL=mimo-v2.5
+```
+
+### DeepSeek
+
+1. 前往 [DeepSeek 平台](https://platform.deepseek.com/) 注册账号并创建 API Key
+2. 在 `.env.local` 中配置：
+
+```env
+AI_API_KEY=你的DeepSeek API密钥
+AI_API_BASE_URL=https://api.deepseek.com/v1
+AI_MODEL=deepseek-chat
+```
+
+> 也可使用 `deepseek-reasoner` 模型，联想质量更高但响应较慢。
+
+### 其他兼容服务
+
+只要服务提供 OpenAI 兼容的 `/chat/completions` 接口，修改以下三个变量即可：
+
+| 变量 | 说明 |
+|------|------|
+| `AI_API_KEY` | API 密钥 |
+| `AI_API_BASE_URL` | 接口地址，需包含 `/chat/completions` 路径 |
+| `AI_MODEL` | 模型名称 |
 
 ## 使用方法
 
@@ -92,6 +118,6 @@ npm run build
 npm run start
 ```
 
-## License
+## 开源协议
 
 MIT
